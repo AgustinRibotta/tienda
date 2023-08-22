@@ -11,6 +11,8 @@
 <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-firestore-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.1.0/firebase-auth-compat.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
 <script>
     
     const firebaseApp = firebase.initializeApp({ 
@@ -43,7 +45,23 @@
             var token = credential.accessToken;
 
             var user = result.user;
-            console.log(user.getIdToken())
+
+            user.getIdToken().then(function(idToken) {
+
+                var data = {
+                    'token_id' : idToken
+                }
+                
+                axios.post('/api/googler-login/', data).then(
+                    function(response){
+                        console.log(response)
+                    }
+                )
+
+                }).catch(function(error) {
+
+                });
+                
 
         }).catch((error) => {
 

@@ -34,6 +34,32 @@ class ListProductStokUser(ListAPIView):
     permission_classes = [IsAuthenticated]
     
     def get_queryset(self):
-        # recuperamos el user
-        user = self.request.user
         return Product.objects.prodoctos_con_stok()
+    
+
+#
+class ListProducGenero(ListAPIView):
+    
+    serializer_class = ProductSerializer
+    
+    def get_queryset(self):
+        genero = self.kwargs['gender']
+        return Product.objects.prodoctos_genero('genero')
+    
+    
+#
+class FiltraProduictos(ListAPIView):
+    
+    serializer_class = ProductSerializer
+
+    def get_queryset(self):
+        
+        varon = self.request.query_params.get('man', None)
+        mujer = self.request.query_params.get('woman', None)
+        nombre = self.request.query_params.get('name', None)
+
+        return Product.objects.filtrar_productos(
+            man = varon,
+            woman = mujer,
+            name = nombre,
+            )

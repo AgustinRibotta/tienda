@@ -12,4 +12,14 @@ urlpatterns = [
         views.ListProductStokUser.as_view(),
         name='producto-stok'
     ),
+    path(
+        'api/product/genero/<gender>/',
+        views.ListProducGenero.as_view(),
+        name='producto-genero'
+    ),
+    path(
+        'api/product/filtrar/',
+        views.FiltraProduictos.as_view(),
+        name='producto-filtrar'
+    ),
 ]

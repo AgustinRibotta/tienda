@@ -1,12 +1,22 @@
 from rest_framework import serializers
 #
-from .models import Product 
+from .models import Product, Colors
 
+# Product
+class ColorsSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = Colors
+        fields = [
+            'color'
+        ]
+    
 
 # Product
 class ProductSerializer(serializers.ModelSerializer):
     
     token_id = serializers.CharField(default=True)
+    colors = ColorsSerializer(many = True)
     
     class Meta:
         model = Product

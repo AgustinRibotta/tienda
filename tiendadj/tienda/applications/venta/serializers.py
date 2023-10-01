@@ -51,6 +51,12 @@ class ProdcutVentaSerializer(serializers.Serializer):
     pk = serializers.IntegerField()
     count = serializers.IntegerField()
 
+    # Serializador para solicitar un array
+class ArrayIntegerSerializer(serializers.ListField):
+    
+    child = serializers.IntegerField()
+
+
 class ProcesoVendaSerialaizer(serializers.Serializer):
     
     type_invoce = serializers.CharField()
@@ -59,5 +65,12 @@ class ProcesoVendaSerialaizer(serializers.Serializer):
     productos = ProdcutVentaSerializer(many=True)
     
 
-
+class ProcesoVendaSerialaizer2(serializers.Serializer):
+    
+    type_invoce = serializers.CharField()
+    type_payment = serializers.CharField()
+    adreese_send = serializers.CharField()
+    # Serializador de tipo array
+    productos = ArrayIntegerSerializer()
+    cantidades = ArrayIntegerSerializer()
     

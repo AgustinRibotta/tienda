@@ -74,3 +74,19 @@ class ProcesoVendaSerialaizer2(serializers.Serializer):
     productos = ArrayIntegerSerializer()
     cantidades = ArrayIntegerSerializer()
     
+    # Validacion generica
+    def validate (self, data):
+        if data['type_payment'] !=  '0' :
+            raise serializers.ValidationError('Ingrese un Tipo de pago correcto')
+        
+        return data
+    
+    
+    # Validacion de los datos por atrivutp
+    def validate_type_invoce(self, value):
+        if value != '0' :
+            raise serializers.ValidationError('Ingrese un valor correcto')
+        
+        return value
+    
+    
